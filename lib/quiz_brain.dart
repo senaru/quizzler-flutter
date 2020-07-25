@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class QuizBrain {
   List<Widget> scoreKeeper = [];
   int i = 0;
-  List<Question> questions = [
+  List<Question> _questions = [
     Question('Some cats are actually allergic to humans', true),
     Question('You can lead a cow down stairs but not up stairs.', false),
     Question('Approximately one quarter of human bones are in the feet.', true),
@@ -34,9 +34,9 @@ class QuizBrain {
         true),
   ];
 
-  displayQ() {
-    if (i < questions.length) {
-      return questions[i].questionText;
+  getQuestionText() {
+    if (i < _questions.length) {
+      return _questions[i].questionText;
     } else {
       return "The End";
     }
@@ -57,7 +57,7 @@ class QuizBrain {
   }
 
   marker(ans) {
-    if (ans == questions[i].questionAnswer) {
+    if (ans == _questions[i].questionAnswer) {
       scoreKeeper.add(score(""));
     } else {
       scoreKeeper.add(score("wrong"));
