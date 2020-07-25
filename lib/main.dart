@@ -25,6 +25,22 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
+  int i = 0;
+
+  List<Widget> scoreKeeper = [];
+
+  List<String> questions = [
+    'You can lead a cow down stairs but not up stairs.',
+    'Approximately one quarter of human bones are in the feet.',
+    'A slug\'s blood is green.',
+  ];
+
+  List answers = [
+    false,
+    true,
+    true,
+  ];
+
   Icon score(result) {
     if (result == "wrong") {
       return Icon(
@@ -39,7 +55,22 @@ class _QuizPageState extends State<QuizPage> {
     }
   }
 
-  List<Widget> scoreKeeper = [];
+  marker(ans) {
+    if (ans == answers[i]) {
+      scoreKeeper.add(score(""));
+    } else {
+      scoreKeeper.add(score("wrong"));
+    }
+    i++;
+  }
+
+  displayQ() {
+    if (i < questions.length) {
+      return questions[i];
+    } else {
+      return "The End";
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +84,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                'This is where the question text will go.',
+                displayQ(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -78,7 +109,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  scoreKeeper.add(score(""));
+                  marker(true);
                 });
               },
             ),
@@ -98,7 +129,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 setState(() {
-                  scoreKeeper.add(score("wrong"));
+                  marker(false);
                 });
               },
             ),
