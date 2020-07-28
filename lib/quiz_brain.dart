@@ -42,6 +42,10 @@ class QuizBrain {
     }
   }
 
+  getQuestionLength() {
+    return _questions.length;
+  }
+
   Icon score(result) {
     if (result == "wrong") {
       return Icon(
